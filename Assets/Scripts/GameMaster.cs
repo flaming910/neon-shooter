@@ -23,13 +23,10 @@ public class GameMaster : MonoBehaviour {
     public Text health;
     public Text deathScore;
     public GameObject DeathScreen;
-    public AudioSource GameMusic1;
-    public AudioSource GameMusic2;
-    public VideoPlayer Music1Video;
-    public VideoPlayer Music2Video;
-    float Music1Time;
-    float Music2Time;
-    float whichSong;
+    public AudioSource MusicSource;
+    public AudioClip[] MusicClips;
+    int whichSong;
+    int prevSong;
 
     float spawnLoc;
     float whichVideo;
@@ -48,11 +45,10 @@ public class GameMaster : MonoBehaviour {
 	void Start () {
         highScore = PlayerPrefs.GetFloat("High Score");
         StartCoroutine(powerUpDelay());
-        whichSong = Random.Range(0, 2);
-        Music1Time = GameMusic1.clip.length;
-        Music2Time = GameMusic2.clip.length;
-        Music1Video.Prepare();
-        Music2Video.Prepare();
+        whichSong = Random.Range(0, MusicClips.Length);
+        MusicSource.clip = MusicClips[whichSong];
+        MusicSource.Play();
+        prevSong = whichSong;
     }
 	
 	// Update is called once per frame
@@ -66,27 +62,16 @@ public class GameMaster : MonoBehaviour {
 
         LevelSystem.levelUp();
 
-        if (whichSong == 0)
+        if(!MusicSource.isPlaying)
         {
-            GameMusic1.Play();
-            Music2Video.targetCameraAlpha = 0;
-            Music1Video.targetCameraAlpha = 1;
-            Music1Video.Play();
-            print(whichSong);
-            whichSong = 2;
-            StartCoroutine(songTimer(Music1Time));
-        } else if (whichSong == 1)
-        {
-            GameMusic2.Play();
-            Music2Video.targetCameraAlpha = 1;
-            Music1Video.targetCameraAlpha = 0;
-            Music2Video.Play();
-            print(whichSong);
-            whichSong = 2;
-            StartCoroutine(songTimer(Music2Time));
-            
+            whichSong = Random.Range(0, MusicClips.Length);
+            while (whichSong == prevSong)
+            {
+                whichSong = Random.Range(0, MusicClips.Length);
+            }
+            MusicSource.clip = MusicClips[whichSong];
+            MusicSource.Play();
         }
-
 
         if (spawnPowerup == 1)
         {
@@ -184,20 +169,6 @@ public class GameMaster : MonoBehaviour {
         }
 
         
-    }
-
-    IEnumerator songTimer(float t)
-    {
-        yield return new WaitForSeconds(t);
-        if (t == Music1Time)
-        {
-            whichSong = 1;
-            
-        } else if (t == Music2Time)
-        {
-            whichSong = 0;
-        }
-
     }
 
     IEnumerator powerUpDelay()
