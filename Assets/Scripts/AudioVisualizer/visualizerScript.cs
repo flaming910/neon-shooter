@@ -28,20 +28,13 @@ public class visualizerScript : MonoBehaviour {
         for(int i = 0; i < barAmount; i++)
         {
             GameObject cubeInstance = (GameObject)Instantiate(visualizeCubePrefab);
-            MaterialPropertyBlock tempBlock = new MaterialPropertyBlock();
             Renderer tempRenderer = cubeInstance.GetComponent<Renderer>();
-            tempRenderer.GetPropertyBlock(tempBlock);
             float hueUpdatePerBar = 360 / (float)barAmount;
-            tempBlock.SetColor("_Color", Color.HSVToRGB( 0.5f , 1, 1));
-            //tempBlock.SetColor("_Color", Color.HSVToRGB( ((i+1)*hueUpdatePerBar) / 360 , 1, 1));
-            tempRenderer.SetPropertyBlock(tempBlock);
-            //tempBlock.SetColor()
+            tempRenderer.material.SetColor("Color_5202825D", Color.HSVToRGB(((i + 1) * hueUpdatePerBar) / 360, 1, 1));
             cubeInstance.transform.position = this.transform.position;
             cubeInstance.transform.parent = this.transform;
             cubeInstance.name = "VisualCube" + i;
-            //this.transform.eulerAngles = new Vector3(0, (-360 / (float)barAmount) * i, 0);
             this.transform.eulerAngles = new Vector3(0, 0, (-360 / (float)barAmount) * i);
-            //this.transform.eulerAngles = new Vector3((-360 / (float)barAmount) * i, 0, 0);
             cubeInstance.transform.position = Vector3.up * 1;
             cubePrefabArray[i] = cubeInstance;
         }
