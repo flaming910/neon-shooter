@@ -25,11 +25,6 @@ public class SceneSwap : MonoBehaviour {
         SceneManager.LoadScene("DifficultySelect");
     }
 
-    public void LevelUpScene()
-    {
-        SceneManager.LoadScene("LevelUpScene");
-    }
-
     public void mainMenu()
     {
         SceneManager.LoadScene("Menu");
