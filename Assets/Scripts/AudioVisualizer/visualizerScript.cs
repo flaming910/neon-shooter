@@ -42,8 +42,8 @@ public class visualizerScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        GetSpectrumAudioSource();
-        if(cubePrefabArray != null)
+        audioSource.GetSpectrumData(spectrumSamples, 0, FFTWindow.Blackman);
+        if (cubePrefabArray != null)
         {
             for (int i = 0; i < barAmount; i++)
             {
@@ -59,11 +59,6 @@ public class visualizerScript : MonoBehaviour {
         }
             
 	}
-
-    void GetSpectrumAudioSource()
-    {
-        audioSource.GetSpectrumData(spectrumSamples, 0, FFTWindow.Blackman);
-    }
 
     void MakeFrequencyBands()
     {
