@@ -655,15 +655,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9d631c310c727d4683594808490f4b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  level: {fileID: 1794215486}
-  xP: {fileID: 1794215486}
-  points: {fileID: 1794215486}
-  damage: {fileID: 1794215486}
-  speed: {fileID: 1794215486}
-  health: {fileID: 1794215486}
-  damageStat: 0
-  speedStat: 0
-  healthStat: 0
 --- !u!4 &1024384164
 Transform:
   m_ObjectHideFlags: 0
@@ -704,7 +695,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 0.5
+  m_Volume: 0.3
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -929,7 +920,7 @@ MonoBehaviour:
   audioSource: {fileID: 1195324070}
   visualizeCubePrefab: {fileID: 129616, guid: bb7e341bdf738e34081b602f19f9363d, type: 2}
   barAmount: 64
-  maxScale: 1500
+  maxScale: 2000
   barWidth: 30
 --- !u!4 &1411998658
 Transform:
@@ -939,7 +930,7 @@ Transform:
   m_GameObject: {fileID: 1411998656}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.027, y: 0.027, z: 0.027}
+  m_LocalScale: {x: 0.0295, y: 0.0295, z: 0.0295}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 6
