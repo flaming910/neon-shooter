@@ -4,14 +4,11 @@ using UnityEngine;
 
 public class ShotControl : MonoBehaviour {
 
+    //Determines bullet speed
     short velocity = 15;
 
-    Transform bulletShot;
     // Use this for initialization
     void Start () {
-     
-        //float shootingDirection = Mathf.Atan2(-Input.GetAxis("xShoot"), Input.GetAxis("yShoot")) * Mathf.Rad2Deg;
-        //transform.rotation = Quaternion.AngleAxis(shootingDirection, Vector3.forward);
 
         Vector3 direction = transform.rotation * Vector3.up;
 
@@ -24,6 +21,7 @@ public class ShotControl : MonoBehaviour {
 		
 	}
 
+    //Gets rid of the bullet after 1.5 seconds
     IEnumerator selfDestruct()
     {
         yield return new WaitForSeconds(1.5f);

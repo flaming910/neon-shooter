@@ -7,13 +7,16 @@ using UnityEngine.Video;
 
 public class GameMaster : MonoBehaviour {
 
+    #region Player/Game Score Management
     public static float playerScore;
     public static int levelUpRequirement = 150;
     public static int level = 1;
     public static int healthPoints = 1;
     public static int isDead;
-    
+    private float highScore;
+    #endregion
 
+    #region Public Objects
     public Transform enemyPentagon;
     public Transform enemyRhombus;
     public Transform dmgUp;
@@ -25,22 +28,30 @@ public class GameMaster : MonoBehaviour {
     public GameObject DeathScreen;
     public AudioSource MusicSource;
     public AudioClip[] MusicClips;
-    int whichSong;
-    int prevSong;
+    #endregion
 
-    float spawnLoc;
-    float whichVideo;
+    #region Music
+    private int whichSong;
+    private int prevSong;
+    #endregion
+
+    #region Powerup Spawning
     float spawnPowerupLocX;
     float spawnPowerupLocY;
     float spawnPowerup;
-    float mobSpawned;
     float spawnDelay;
     float baseDelay = 1.5f;
     float whatPowerup;
+    #endregion
+
+    #region Enemy Spawning
+    float spawnLoc;
+    float mobSpawned;
     int spawnCoord = 20;
     float x;
     float y;
-    float highScore;
+    #endregion
+
 	// Use this for initialization
 	void Start () {
         highScore = PlayerPrefs.GetFloat("High Score");
@@ -127,7 +138,6 @@ public class GameMaster : MonoBehaviour {
             healthPoints += level/2;
             level += 1;
             levelUpRequirement = levelUpRequirement * level;
-            PlayerControl.baseDelay = PlayerControl.baseDelay / (level * 0.5f);
         }
 
         if (Input.GetKey("escape"))

@@ -4,41 +4,61 @@ using UnityEngine;
 
 public class PlayerControl : MonoBehaviour {
 
-    public static Vector3 playerPos;
-    public static float health; 
 
-	float xVelAdj;
-	float yVelAdj;
-	public float xFire;
-	public float yFire;
-    public bool isDS4;
-    public static float enemyDied;
+    #region Controlling Player Variables
+    //X and Y movement variables
+    private float xVelAdj;
+	private float yVelAdj;
+    //X and Y shooting variables
+	private float xFire;
+	private float yFire;
+    //Variable to store if the connected controller is a PlayStation 4 Controller
+    private bool isDS4;
+    #endregion
+
+    #region Player Stats and Power Ups
+    //Public static because used in GameMaster.cs to display health
+    public static float health;
+    //Public static because used in EnemyPathing.cs to determine damage taken by enemies
     public static float damage;
-    float speed;
+    private float speed;   
+    private float shotDelay;
+    private float baseDelay;
+    //Powerups
+    private float speedUp;
+    private float lifeUp;
+    private float powerUp;
+    #endregion
 
-    float leftBorder;
-    float rightBorder;
-    float bottomBorder;
-    float topBorder;
-    Vector3 playerSize;
+    #region Bullet Transforms
+    public Transform bulletShot;
+    //Used when Damage Up is active(powerUp)
+    public Transform bulletShotRed;
+    #endregion
 
+    #region Variables to ensure player stays within screen borders
+    private float leftBorder;
+    private float rightBorder;
+    private float bottomBorder;
+    private float topBorder;
+    private Vector3 playerSize;
+    #endregion
 
-    Vector3 lastKnownRotation;
-    float powerUp;
-    float speedUp;
-    float lifeUp;
+    #region Audio
     public AudioClip bulletSound;
     public AudioClip gotHit;
     public AudioClip blewUp;
-    public Transform bulletShot;
-    public Transform bulletShotRed;
-    float shotDelay;
-    public static float baseDelay;
-
     private AudioSource audioSource;
+    #endregion
 
-	// Use this for initialization
-	void Start () {
+    #region Misc.
+    public static Vector3 playerPos;
+    public static float enemyDied;
+    Vector3 lastKnownRotation;
+    #endregion
+
+    // Use this for initialization
+    void Start () {
         audioSource = GetComponent<AudioSource>();
         damage = 1;
         health = 5;
@@ -102,6 +122,7 @@ public class PlayerControl : MonoBehaviour {
             damage = 2;
             StartCoroutine(powerUPTimer());
         }
+        //Resets damage back to normal after timer is over.
         if (powerUp == 1)
         {
             damage = 1;
@@ -156,7 +177,7 @@ public class PlayerControl : MonoBehaviour {
             shotDelay = baseDelay;
             audioSource.clip = bulletSound;
             audioSource.Play();
-            StartCoroutine(delayRest() );
+            StartCoroutine(delayRest());
         }
 
         if ((yFire > 0.2 || yFire < -0.2) && (shotDelay == 0))
