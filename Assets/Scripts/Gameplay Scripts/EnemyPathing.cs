@@ -29,6 +29,8 @@ public class EnemyPathing : MonoBehaviour
     void Update()
     {
 
+        print("changed some code");
+
         if (gameObject.name == "EnemyRhombus(Clone)")
         {
             baseVel = 2f;
